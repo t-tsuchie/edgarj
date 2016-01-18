@@ -41,7 +41,7 @@ GEM
     mime-types (2.99)
     minitest (4.7.5)
     multi_json (1.11.2)
-    mysql2 (0.4.2)
+    mysql2 (0.3.20)
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -75,7 +75,7 @@ PLATFORMS
 
 DEPENDENCIES
   edgarj!
-  mysql2
+  mysql2 (~> 0.3.20)
 
 BUNDLED WITH
    1.11.2
