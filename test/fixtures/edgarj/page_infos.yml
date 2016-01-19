@@ -24,7 +24,7 @@ root_authors:
   record_data:  '<%= Base64.encode64(Marshal.dump(Edgarj::SearchForm.new(Author))) %>'
 
 book_reader_authors:
-  sssn_id:    <%= ActiveRecord::Fixtures.identify(:book_reader) %>
+  sssn_id:    <%= ActiveRecord::FixtureSet.identify(:book_reader) %>
   view:       authors
   lines:      2
   order_by:   id
@@ -34,7 +34,7 @@ book_reader_authors:
   updated_at: 2012-07-17 00:00:00
 
 author_reader_authors:
-  sssn_id:    <%= ActiveRecord::Fixtures.identify(:author_reader) %>
+  sssn_id:    <%= ActiveRecord::FixtureSet.identify(:author_reader) %>
   view:       authors
   lines:      2
   order_by:   updated_at
@@ -44,7 +44,7 @@ author_reader_authors:
   updated_at: 2012-07-17 00:00:00
 
 comic_rep_01_authors:
-  sssn_id:    <%= ActiveRecord::Fixtures.identify(:comic_rep_01) %>
+  sssn_id:    <%= ActiveRecord::FixtureSet.identify(:comic_rep_01) %>
   view:       authors
   lines:      2
   order_by:   updated_at
