@@ -1,3 +1,4 @@
+require 'core_ext/active_record'
 require 'core_ext/resources'
 require 'edgarj/enum_cache'
 
