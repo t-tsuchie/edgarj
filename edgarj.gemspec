@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "kaminari",            '~> 0.15'
   s.add_dependency "remotipart",          '~> 1.2'
   s.add_dependency 'awesome_nested_set',  '~> 3'
+  s.add_dependency 'activerecord-session_store',  '~> 0.1'
 
   s.add_development_dependency "mysql2",          '~> 0.3.20'
 end

@@ -36,7 +36,7 @@ module Edgarj
     end
 
     initializer "edgarj" do
-     #ActiveRecord::SessionStore::Session.table_name = 'edgarj_sssns'
+      ActiveRecord::SessionStore::Session.table_name = 'edgarj_sssns'
       Engine::load_config
       Engine::load_edgarj_conf_in_app
       for file in Dir.glob(File.join(File.dirname(__FILE__), "../../locale/*.yml")) do
