@@ -1,0 +1,100 @@
+ja:
+  # active record column
+  activerecord:
+    models:
+      edgarj/address:                住所
+      edgarj/model_permission:       権限
+      edgarj/sssn:                   セッション
+      edgarj/user:                   ユーザ
+      edgarj/user_group:             グループ
+      edgarj/user_group_user:        ユーザのグループ所属
+      edgarj/zip_address:            〒→住所
+    attributes:
+      edgarj/address:
+        zip:                      〒
+        prefecture:               都道府県
+        city:                     市・郡
+        town:                     町・村
+        other:                    番地
+        other2:                   ビル・フロア
+        other3:                   (未使用)
+        other4:                   (未使用)
+      edgarj/model_permission:
+        flags:                    アクセス種類
+      edgarj/user:
+        code:                     ログインId
+        password_confirmation:    パスワード(確認)
+      edgarj/zip_address:
+        zip:                      〒
+        prefecture:               都道府県
+        city:                     市・郡
+        town:                     町・村
+  # active model column
+  activemodel:
+    attributes:
+      edgarj/search_form:
+        _id:                      Id
+      edgarj/search_popup:
+        val:                      値
+
+  views:
+    pagination:
+      first:                      "&laquo; 最初"
+      last:                       "最後 &raquo;"
+      previous:                   "&lsaquo; 前"
+      next:                       "次 &rsaquo;"
+      truncate:                   "&hellip;"
+
+  # コントローラ名
+  #
+  # もしコントローラから導出されるモデルのラベルが activerecord.models で
+  # 定義されてない場合、ここの定義が使用されます。
+  controller:
+   #edgarj/addresses:              住所
+
+  edgarj:
+    # Edgarj specific time format
+    time:
+      format:           ! '%Y/%m/%d %H:%M:%S'
+    form:
+      delete_confirm: '本当に削除しますか？'
+      popup:
+        title:        '%s 選択'
+    message_popup:
+      title:            'メッセージ'
+    view:
+      sssns:
+        login:          'ログイン'
+        login_success:  'ログインしました。'
+        login_failed:   'ログインに失敗しました。'
+        logout:         'ログアウトしました。'
+    # final fallback is here.
+    default:
+      clear:              'クリア'
+      close:              '閉じる'
+      create:             '作成'
+      created_at:         '作成日時'
+      csv_download:       'csvダウンロード'
+      date:               '日付'
+      delete:             '削除'
+      kind:               '種類'
+      login_failed:       'ログインできません。'
+      logout:             'ログアウト'
+      name:               '名前'
+      not_found:          'Not found'
+      parent:             '親'
+      password:           'パスワード'
+      permission_no:      '権限がありません。'
+      read:               '参照'
+      records_per_page:   '件/頁'
+      save:               '保存'
+      search:             '検索'
+      search_clear:       'クリア'
+      search_end:         '検索終了'
+      search_form:        '検索フォーム'
+      search_save:        '検索条件保存(未実装)'
+      seq:                '順序'
+      total_records:      計 %d件
+      update:             '更新'
+      updated_at:         '更新日時'
+      zip_complete:       '〒→住所'

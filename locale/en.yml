@@ -1,0 +1,94 @@
+en:
+  # active record column
+  activerecord:
+    models:
+      edgarj/address:                Address
+      edgarj/model_permission:       Role
+      edgarj/sssn:                   Session
+      edgarj/user:                   User
+      edgarj/user_group:             Group
+      edgarj/user_group_user:        Group - User
+      edgarj/zip_address:            Zip - Address
+    attributes:
+      edgarj/address:
+        zip:                      Zip
+        prefecture:               State
+        city:                     City/County
+        town:                     Town
+        other:                    Street
+        other2:                   Bldg/Floor
+        other3:                   (Reserved)
+        other4:                   (Reserved)
+      edgarj/model_permission:
+        flags:                    Access Type
+      edgarj/user:
+        code:                     Login Id
+        password_confirmation:    Password (confirmation)
+      edgarj/zip_address:
+        zip:                      Zip
+        prefecture:               State
+        city:                     City/County
+        town:                     Town
+  # active model column
+  activemodel:
+    attributes:
+      edgarj/search_form:
+        _id:                      Id
+      edgarj/search_popup:
+        val:                      Value
+
+  # controller human name
+  #
+  # if derived model class name is not defined at activerecord.models,
+  # then definition here is used.
+  controller:
+   #edgarj/addresses:              Address
+
+  edgarj:
+    # Edgarj specific time format
+    time:
+      format:           ! '%b %d,%Y %H:%M:%S'
+    form:
+      delete_confirm: 'Really Delete?'
+      popup:
+        title:        '%s Selection'
+    message_popup:
+      title:            'Message'
+    view:
+      sssns:
+        login:          'Login'
+        login_success:  'Logged in!'
+        login_failed:   'Logged failed!'
+        logout:         'Logged out!'
+
+    # final fallback is here.
+    #
+    # NOTE: even if humanize() is enough in some cases (e.g. name: 'Name')
+    # I18n is defined here because those are used in Edgarj plugin:
+    default:
+      clear:              'Clear'
+      close:              'Close'
+      create:             'Create'
+      created_at:         'Created at'
+      csv_download:       'CSV Download'
+      date:               Date
+      delete:             'Delete'
+      kind:               'Kind'
+      login_failed:       'Login failed'
+      logout:             'Logout'
+      name:               'Name'
+      not_found:          'Not found'
+      parent:             'Parent'
+      password:           'Password'
+      permission_no:      You don't have enough permission.
+      read:               'Read'
+      save:               'Save'
+      search_form:        'Search Form'
+      seq:                'Sequence'
+      total_records:      Total %d Records
+      updated_at:         'Update'
+      updated_at:         'Updated at'
+      zip_complete:       'to Address'
+
+      # just for test purpose
+      test_column:        'TEST COLUMN in global!!'

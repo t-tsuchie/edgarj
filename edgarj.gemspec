@@ -7,13 +7,19 @@ require "edgarj/version"
 Gem::Specification.new do |s|
   s.name        = "edgarj"
   s.version     = Edgarj::VERSION
-  s.authors     = ["TODO: Your name"]
+  s.licenses    = ['MIT']
+  s.authors     = ["Fuminori Ido"]
   s.email       = ["TODO: Your email"]
   s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Edgarj."
-  s.description = "TODO: Description of Edgarj."
-
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.summary     = "Scaffold with Ajax, search, sort, 'belongs_to' popup, and more."
+  s.description = <<EOM
+Edgarj is an Ajax-based scaffold with QBE(Query By Example) search form,
+column sort on record list,
+popup view & controller for 'belongs_to' relation table to pick up a parent record,
+csv download, and
+user-role based access control.
+EOM
+  s.files = Dir["{app,config,db,lib,locale}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails",               "~> 4.0.13"

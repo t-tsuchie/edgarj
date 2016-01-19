@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  view:
+    authors:
+      test_word:  'Test Word!'
