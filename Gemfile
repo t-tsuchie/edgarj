@@ -11,6 +11,10 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'mysql2', '~> 0.3.20'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'remotipart'
+gem 'kaminari'
 gem 'config'
 gem 'awesome_nested_set'
 
