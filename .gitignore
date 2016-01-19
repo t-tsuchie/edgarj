@@ -7,4 +7,7 @@ test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
 
+test/dummy/db/migrate/*_create_edgar*
+test/dummy/db/migrate/*_rename_edgar*
+
 *~
