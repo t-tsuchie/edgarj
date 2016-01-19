@@ -1,0 +1,84 @@
+root_zip_address:
+  sssn:       root
+  view:       edgarj/zip_address
+  lines:      5
+  order_by:   created_at
+  dir:        desc
+  page:       33
+ #record_data: '[%= Base64.encode64(Marshal.dump(Edgarj::SearchForm.new(Edgarj::ZipAddress))) %]'
+  record_data: '<%= Base64.encode64(Marshal.dump(Edgarj::SearchForm.new(Edgarj::Sssn))) %>'
+  created_at: 2012-07-17 00:00:00
+  updated_at: 2012-07-17 00:00:00
+
+#---------------------------------------------------------
+# Dummy App specific PageInfo
+#---------------------------------------------------------
+<% if File.exist?(Rails.root + 'app/models/author.rb') %>
+root_authors:
+  sssn:         root
+  view:         authors
+  order_by:
+  dir:
+  page:         1
+  lines:        10
+  record_data:  '<%= Base64.encode64(Marshal.dump(Edgarj::SearchForm.new(Author))) %>'
+
+book_reader_authors:
+  sssn_id:    <%= ActiveRecord::Fixtures.identify(:book_reader) %>
+  view:       authors
+  lines:      2
+  order_by:   id
+  dir:        desc
+  page:       2
+  created_at: 2012-07-17 00:00:00
+  updated_at: 2012-07-17 00:00:00
+
+author_reader_authors:
+  sssn_id:    <%= ActiveRecord::Fixtures.identify(:author_reader) %>
+  view:       authors
+  lines:      2
+  order_by:   updated_at
+  dir:        desc
+  page:       100
+  created_at: 2012-07-17 00:00:00
+  updated_at: 2012-07-17 00:00:00
+
+comic_rep_01_authors:
+  sssn_id:    <%= ActiveRecord::Fixtures.identify(:comic_rep_01) %>
+  view:       authors
+  lines:      2
+  order_by:   updated_at
+  dir:        desc
+  page:       100
+  created_at: 2012-07-17 00:00:00
+  updated_at: 2012-07-17 00:00:00
+<% end %>
+
+<% if File.exist?(Rails.root + 'app/models/book.rb') %>
+root_books:
+  sssn:         root
+  view:         books
+  order_by:
+  dir:
+  page:         1
+  lines:        10
+  record_data:  '<%= Base64.encode64(Marshal.dump(Edgarj::SearchForm.new(Book))) %>'
+
+book_reader_books:
+  sssn:       book_reader
+  view:       books
+  lines:      2
+  order_by:   id
+  dir:        desc
+  page:       2
+  record_data:  '<%= Base64.encode64(Marshal.dump(Edgarj::SearchForm.new(Book))) %>'
+
+comic_rep_01_books:
+  sssn:       comic_rep_01
+  view:       books
+  lines:      2
+  order_by:   id
+  dir:        desc
+  page:       2
+  record_data:  '<%= Base64.encode64(Marshal.dump(Edgarj::SearchForm.new(Book))) %>'
+<% end %>

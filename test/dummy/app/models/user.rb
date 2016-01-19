@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  attr_accessible :code, :name
-
   has_many :user_group_users, dependent: :destroy, class_name: 'Edgarj::UserGroupUser'
   has_many :user_groups, through: :user_group_users, class_name: 'Edgarj::UserGroup'
   has_many :sssns, dependent: :destroy, class_name: 'Edgarj::Sssn'

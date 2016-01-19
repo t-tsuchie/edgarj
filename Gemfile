@@ -12,6 +12,7 @@ gemspec
 
 gem 'mysql2', '~> 0.3.20'
 gem 'config'
+gem 'awesome_nested_set'
 
 group :development, :test do
   gem 'byebug'

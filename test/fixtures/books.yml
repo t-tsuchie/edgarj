@@ -1,0 +1,56 @@
+# for edgarj:scaffold generated controller test
+one:
+  author: m_polanyi
+  name:   The Tacit Dimension
+
+tacit_dimension:
+  author: m_polanyi
+  name:   The Tacit Dimension
+
+personal_knowledge:
+  author: m_polanyi
+  name:   Personal Knowledge
+
+meaning:
+  author: m_polanyi
+  name:   Meaning
+
+logic_of_liberty:
+  author: m_polanyi
+  name:   Logic of Liberty
+
+knowing_n_being:
+  author: m_polanyi
+  name:   Knowing and Being
+
+science_of_budo:
+  author: t_nangou
+  name:   Science of Budo
+
+what_is_budo:
+  author: t_nangou
+  name:   What is Budo
+
+the_way_of_budo_training:
+  author: t_nangou
+  name:   The way of Budo Training
+
+miracle_of_japan_history:
+  author: e_masuda
+  name:   Miracle of Japan History
+
+the_origin_01:
+  author: y_yasuhiko
+  name:   Mobile Suit Gundam THE ORIGIN 01
+
+the_origin_02:
+  author: y_yasuhiko
+  name:   Mobile Suit Gundam THE ORIGIN 02
+
+the_origin_03:
+  author: y_yasuhiko
+  name:   Mobile Suit Gundam THE ORIGIN 03
+
+the_origin_04:
+  author: y_yasuhiko
+  name:   Mobile Suit Gundam THE ORIGIN 04

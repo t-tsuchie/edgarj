@@ -1,0 +1,95 @@
+role_admin:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: admin
+
+role_edgarj_zip_address_reader:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: edgarj_zip_address_reader
+
+role_user_group_user_reader:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: user_group_user_reader
+
+#---------------------------------------------------------
+# Dummy App specific roles
+#---------------------------------------------------------
+role_product_read_only:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: product_read_only
+
+role_customer_read_update:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: customer_read_update
+
+role_album_viewer:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'album/viewer'
+
+role_question_admin:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'question/admin'
+
+role_question_forwarder:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'question/forwarder'
+
+role_question_user:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'question/user'
+
+role_book_admin:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'book/admin'
+
+role_book_reader:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'book/reader'
+
+role_book_updater:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'book/updater'
+
+role_author_reader:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'author/reader'
+
+role_author_admin:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'author/admin'
+
+# author_assignee can access author-page and book page
+# with limited scope + create/read/update only (no delete)
+role_author_assignee_author_page:
+  kind: <%= Edgarj::UserGroup::Kind::ROLE %>
+  name: 'author_assignee'
+
+#-------------------------------------------------
+# Org starts here.
+#-------------------------------------------------
+
+user_org_top:
+  kind: <%= Edgarj::UserGroup::Kind::USER_ORG %>
+  name: Top
+
+user_org_sales:
+  kind: <%= Edgarj::UserGroup::Kind::USER_ORG %>
+  name: Sales
+
+#-------------------------------------------------
+# AUTHOR_ASSIGNEE starts here.
+#
+# NOTE: AUTHOR_ASSIGNEE is additional value of 'kind' column
+# just for test/dummy app.  It is required to define here
+# for test of Edgarj engine, but is *NOT* required for external
+# application (e.g. MyApp) test with this.  That's why if-statement
+# exists here.
+#-------------------------------------------------
+<% if Edgarj::UserGroup::Kind.const_defined?(:AUTHOR_ASSIGNEE) %>
+author_assignee_comic_rep:
+  kind: <%= Edgarj::UserGroup::Kind::AUTHOR_ASSIGNEE %>
+  name: Comic Rep
+
+author_assignee_science_rep:
+  kind: <%= Edgarj::UserGroup::Kind::AUTHOR_ASSIGNEE %>
+  name: Sicence Rep
+<% end %>

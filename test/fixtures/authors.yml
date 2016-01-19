@@ -1,0 +1,32 @@
+m_polanyi:
+  name:       Michael Polanyi
+  user_group_id: <%= Edgarj::label('author_assignee_science_rep') %>
+  created_at: <%= Time.zone.local(2012, 9,29,23,59,59).to_s(:db) %>
+
+t_nangou:
+  name:       Tsugumasa Nangou
+  user_group_id: <%= Edgarj::label('author_assignee_science_rep') %>
+  created_at: <%= Time.zone.local(2012, 9,30,23,59,59).to_s(:db) %>
+
+e_masuda:
+  name:       Etsusuke Masuda
+  created_at: <%= Time.zone.local(2012,10, 1, 0, 0, 0).to_s(:db) %>
+
+y_yasuhiko:
+  name:       Yoshikazu Yasuhiko
+  user_group_id: <%= Edgarj::label('author_assignee_comic_rep') %>
+  created_at: <%= Time.zone.local(2012,10, 1, 0, 0, 1).to_s(:db) %>
+
+r_yamagishi:
+  name:       Ryoko Yamagishi
+  user_group_id: <%= Edgarj::label('author_assignee_comic_rep') %>
+  created_at: <%= Time.zone.local(2012,10, 1,23,59,59).to_s(:db) %>
+
+m_hagio:
+  name:       Moto Hagio
+  user_group_id: <%= Edgarj::label('author_assignee_comic_rep') %>
+  created_at: <%= Time.zone.local(2012,10, 2, 0, 0, 0).to_s(:db) %>
+
+homeless:
+  name:       Homeless Writer
+  created_at: <%= Time.zone.local(2012,10, 2, 0, 0, 1).to_s(:db) %>

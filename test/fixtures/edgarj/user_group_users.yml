@@ -1,0 +1,114 @@
+role_admin:
+  user_group: role_admin
+  user:       root
+
+role_edgarj_zip_address_reader:
+  user_group: role_edgarj_zip_address_reader
+  user:       edgarj_zip_address_reader
+
+role_user_group_user_reader:
+  user_group_id:  <%= Edgarj::label('role_user_group_user_reader') %>
+  user_id:        <%= Edgarj::label('user_group_user_reader') %>
+
+#---------------------------------------------------------
+# Dummy App specific role assignments
+#---------------------------------------------------------
+role_product_read_only:
+  user_group: role_product_read_only
+  user_id:    2
+
+role_product_read_only2:
+  user_group: role_product_read_only
+  user_id:    3
+
+role_customer_read_update:
+  user_group: role_customer_read_update
+  user_id:    2
+
+role_album_viewer_album_reader:
+  user_group: role_album_viewer
+  user_id:    4
+
+role_question_admin_1:
+  user_group: role_question_admin
+  user_id:    6
+
+role_question_forwarder_1:
+  user_group: role_question_forwarder
+  user_id:    7
+
+role_question_user_1:
+  user_group: role_question_user
+  user_id:    8
+
+role_book_admin:
+  user_group: role_book_admin
+  user:       book_admin
+
+role_book_admin_on_guest:
+  user_group: role_book_admin
+  user:       guest
+
+role_book_reader:
+  user_group: role_book_reader
+  user:       book_reader
+
+role_book_updater:
+  user_group: role_book_updater
+  user:       book_updater
+
+role_author_admin_on_guest:
+  user_group: role_author_admin
+  user:       guest
+
+role_author_reader:
+  user_group: role_author_reader
+  user:       author_reader
+
+role_author_assignee_author_page:
+  user_group: role_author_assignee_author_page
+  user:       comic_rep_01
+
+
+#-------------------------------------------------
+# Org starts here.
+#-------------------------------------------------
+
+user_org_top_root:
+  user_group: user_org_top
+  user:       root
+
+user_org_top_question_forwarder:
+  user_group: user_org_top
+  user_id:    7
+
+user_org_sales_root:
+  user_group: user_org_sales
+  user:       root
+
+user_org_sales_aaron:
+  user_group: user_org_sales
+  user_id:    2
+
+user_org_sales_wells:
+  user_group: user_org_sales
+  user_id:    5
+
+user_org_sales_question_user:
+  user_group: user_org_sales
+  user_id:    8
+
+#-------------------------------------------------
+# AUTHOR_ASSIGNEE starts here.
+#-------------------------------------------------
+author_assignee_comic_rep_01:
+  user_group: author_assignee_comic_rep
+  user:       comic_rep_01
+
+author_assignee_book_admin:
+  user_group: author_assignee_comic_rep
+  user:       book_admin
+
+author_assignee_comic_rep_02:
+  user_group: author_assignee_comic_rep
+  user:       comic_rep_02

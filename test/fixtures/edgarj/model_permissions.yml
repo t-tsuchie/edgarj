@@ -1,0 +1,97 @@
+<%
+f = Edgarj::ModelPermission::FlagsBitset
+%>
+
+product_read_only:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_product_read_only) %>
+  name:           'product read only'
+  model:          Product
+  flags:          <%= f::READ %>
+
+customer_read_update:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_customer_read_update) %>
+  name:           'customer read/update'
+  model:          Customer
+  flags:          <%= f::READ + f::UPDATE %>
+
+album_viewer:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_album_viewer) %>
+  name:           'album viewr'
+  model:          Album::Viewer
+  flags:          <%= f::READ %>
+
+#= Question
+
+question_admin:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_question_admin) %>
+  name:           'question admin'
+  model:          Question
+  flags:          <%= Edgarj::ModelPermission::FLAGS_ALL %>
+
+question_forwarder:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_question_forwarder) %>
+  name:           'question forwarder'
+  model:          Question
+  flags:          <%= f::READ %>
+
+question_user:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_question_user) %>
+  name:           'question user'
+  model:          Question
+  flags:          <%= f::READ %>
+
+#= Book
+
+book_admin:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_book_admin) %>
+  name:           'book admin'
+  model:          Book
+  flags:          <%= Edgarj::ModelPermission::FLAGS_ALL %>
+
+book_admin_author_popup:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_book_admin) %>
+  name:           'author popup for book admin'
+  model:          Author
+  flags:          <%= f::READ %>
+
+book_reader:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_book_reader) %>
+  name:           'book reader'
+  model:          Book
+  flags:          <%= f::READ %>
+
+# book_reader does *NOT* have author-popup read permission.
+
+book_updater:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_book_updater) %>
+  name:           'book updater'
+  model:          Book
+  flags:          <%= f::READ + f::UPDATE %>
+
+book_updater_author_popup:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_book_updater) %>
+  name:           'author popup for book updater'
+  model:          Author
+  flags:          <%= f::READ %>
+
+#= Author
+
+author_admin:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_author_admin) %>
+  name:           'author admin'
+  model:          Author
+  flags:          <%= Edgarj::ModelPermission::FLAGS_ALL %>
+
+author_reader:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_author_reader) %>
+  name:           'author reader'
+  model:          Author
+  flags:          <%= f::READ %>
+
+#= Author-assignee
+
+author_assignee_author_page:
+  user_group_id:  <%= ActiveRecord::Fixtures.identify(:role_author_assignee_author_page) %>
+  name:           'author assignee'
+  model:          Author
+  flags:          <%= f::CREATE + f::READ + f::UPDATE + f::DELETE %>

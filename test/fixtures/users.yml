@@ -1,0 +1,49 @@
+root:
+  name:           root
+  code:           root
+
+not_permitted:
+  name:           not_permitted
+  code:           not_permitted
+
+edgarj_zip_address_reader:
+  name:           Edgarj::ZipAddress Reader
+  code:           edgarj_zip_address_reader
+
+user_group_user_reader:
+  name:           user_group_user_reader
+  code:           user_group_user_reader
+
+#---------------------------------------------------------
+# Dummy App specific users
+#---------------------------------------------------------
+book_admin:
+  name:           Book Admin
+  code:           book_admin
+
+book_reader:
+  name:           Book Reader
+  code:           book_reader
+
+book_updater:
+  name:           Book Updater
+  code:           book_updater
+
+author_reader:
+  name:           Author Reader
+  code:           author_reader
+
+comic_rep_01:
+  name:           Comic Rep 01
+  code:           comic_rep_01
+
+comic_rep_02:
+  name:           Comic Rep 02
+  code:           comic_rep_02
+
+# 'guest' user is an admin on only author and book, not edgarj*.
+# Same as test/dummy/db/seeds.rb, which is for demo site, and
+# fixture here is for development.
+guest:
+  name:           Guest User
+  code:           guest

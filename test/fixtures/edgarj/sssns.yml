@@ -1,0 +1,38 @@
+root:
+  user_id:    <%= Edgarj::label('root') %>
+  session_id: session_id_root
+  created_at: 2012-07-18 00:00:00
+  updated_at: 2012-07-18 00:00:00
+
+not_permitted:
+  user_id:    <%= Edgarj::label('not_permitted') %>
+  session_id: session_id_not_permitted
+  created_at: 2012-07-18 00:00:00
+  updated_at: 2012-07-18 00:00:00
+
+user_group_user_reader:
+  user_id:    <%= Edgarj::label('user_group_user_reader') %>
+  session_id: session_id_user_group_user_reader
+  created_at: 2014-08-28 00:00:00
+  updated_at: 2014-08-28 00:00:00
+
+#---------------------------------------------------------
+# Dummy App specific session
+#---------------------------------------------------------
+book_reader:
+  user_id:    <%= Edgarj::label('book_reader') %>
+  session_id: session_id_book_reader
+  created_at: 2012-07-18 00:00:00
+  updated_at: 2012-07-18 00:00:00
+
+author_reader:
+  user_id:    <%= Edgarj::label('author_reader') %>
+  session_id: session_id_author_reader
+  created_at: 2012-07-18 00:00:00
+  updated_at: 2012-07-18 00:00:00
+
+comic_rep_01:
+  user_id:    <%= Edgarj::label('comic_rep_01') %>
+  session_id: session_id_comic_rep_01
+  created_at: 2012-07-18 00:00:00
+  updated_at: 2012-07-18 00:00:00
