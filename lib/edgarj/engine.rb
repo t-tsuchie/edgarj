@@ -1,4 +1,5 @@
 require 'core_ext/resources'
+require 'edgarj/enum_cache'
 
 module Edgarj
   class Engine < ::Rails::Engine
