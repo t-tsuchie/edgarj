@@ -1,0 +1,65 @@
+#edgarj_menu
+{ margin:     0;
+  background: #842;
+  padding:    0}
+
+  #edgarj_menu li
+  { float: left;
+    list-style: none;
+    font: 12px Tahoma, Arial}
+
+  #edgarj_menu li a
+  { display:          block;
+    background:       #842;
+    padding:          3px 10px;
+    text-decoration:  none;
+    text-align:       center;
+    border-top:       1px solid #842;
+    border-left:      1px solid #842;
+    border-right:     1px solid #842;
+    border-bottom:    1px solid #842;
+    width:            70px;
+    color:            #EAFFED;
+    white-space:      nowrap}
+
+  #edgarj_menu li a:hover
+  { background:       #942;
+    border-top:       1px solid #fdb;
+    border-left:      1px solid #fdb;
+    border-right:     1px solid #321;
+    border-bottom:    1px solid #321;
+  }
+    
+    #edgarj_menu li ul
+    { margin:         0;
+      padding:        0;
+      background:     #ccc;
+      position:       absolute;
+      visibility:     hidden;
+      border-top:     1px solid #ccc;
+      border-left:    1px solid #eee;
+      border-right:   1px solid #888;
+      border-bottom:  1px solid #888;}
+    
+      #edgarj_menu li ul li
+      { float: none;
+        background:     #ccc;
+        display: inline}
+
+      #edgarj_menu li ul li a
+      { width:          auto;
+        background:     #ccc;
+        text-align:     left;
+        border-top:     1px solid #ccc;
+        border-left:    1px solid #ccc;
+        border-right:   1px solid #ccc;
+        border-bottom:  1px solid #ccc;
+        color:          #000}
+      
+      #edgarj_menu li ul li a:hover
+      { background:     #eee;
+        border-top:     1px solid #fff;
+        border-left:    1px solid #fff;
+        border-right:   1px solid #aaa;
+        border-bottom:  1px solid #aaa;
+      }

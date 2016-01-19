@@ -1,0 +1,17 @@
+<%#
+Template for search_operator() helper.
+
+=== INPUTS
+o::       operator form builder
+method::  attribute name of the object
+%>
+
+<%
+name  = "edgarj_search_form[edgarj_search_form_operator][#{method.to_s}]"
+id    = name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")
+op    = o.object.send(method).blank? ? '=' : o.object.send(method)
+%>
+<div id='<%= id + "_label" -%>' class='search_operator'>
+  <%= h(op) %>
+</div>
+<%= o.hidden_field method %>

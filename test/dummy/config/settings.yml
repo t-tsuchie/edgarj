@@ -1,0 +1,5 @@
+edgarj:
+  _overwrite_test:  'HELLO WORLD'
+
+dummy_app:
+  hello:            'Hello, World'

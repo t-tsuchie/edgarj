@@ -1,0 +1,16 @@
+<!-- edgarj/_search_save_popup.html.erb -->
+<div id=search_save_popup style='display:none'>
+<center>
+  <h3><%= t('search_save_dialog') %></h3>
+
+  <p id=search_save_popup_flash_error  style="color: red"
+      ><%=   @flash_error  || '' %></p>
+
+  <%= t('name') %><input type=text_field id=view_status_name>
+  <%= url = url_for(:action=>'search_save');
+      button_to_function t('save'),
+          sprintf("Edgarj.SearchSavePopup.submit('%s')", url) %>
+  <hr>
+  <%= button_to_function t('close'), 'Edgarj.SearchSavePopup.close()' %>
+</center>
+</div>

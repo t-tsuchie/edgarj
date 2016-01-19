@@ -1,0 +1,4 @@
+<% if !@search.errors.any? %>
+  $('#edgarj_list').replaceWith("<%= j(render 'list') %>");
+<% end %>
+$('#edgarj_search_form').replaceWith("<%= j(render 'search_form') %>");

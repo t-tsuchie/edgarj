@@ -1,0 +1,52 @@
+<%#
+= INPUTS
+
+@list::       model instance list
+@count::      model instance list count
+@page_info::  page_info instance
+%>
+<div id=edgarj_list>           <!-- edgarj/_list.html.erb -->
+  <table width="100%">
+    <tr>
+      <td><%= t('edgarj.default.total_records') % @count %></td>
+      <td>
+          <%= paginate @list,
+                  remote: true,
+                  params: {action: 'index'} %>
+      </td>
+      <td align=right>
+        <%=
+            form_for(@page_info,
+                remote: true,
+                url:    {action: 'page_info_save', id: @page_info.id,
+                         controller: params[:controller]},
+                html:   {id: 'edgarj_form_lines_per_page', method: :put}
+            ) do |f| %>
+          <%= f.select('lines', Edgarj::LINES_PER_PAGE.map{|x| [x,x]}) %>
+          <%= v('records_per_page') %>
+        <% end %>
+      </td>
+      <td>
+        <%= button_to v('csv_download'), {
+                  controller: params[:controller],
+                  action:     'csv_download'},
+                  {method: :get} %>
+      </td>
+    </tr>
+  </table>
+  <%= drawer.draw_list(@list) %>
+
+  <%= javascript_tag do %>
+  $(function(){
+    /* action on changing records/page at the selection in list */
+    $('#edgarj_page_info_lines').change(function(){
+      $("#edgarj_form_lines_per_page").trigger("submit.rails");
+    });
+  
+    /* show detail on clicking a list row */
+    $('._edgarj_list_column').click(function(){
+      $.ajax($(this).attr('data-url'));
+    });
+  });
+  <% end %>
+</div>

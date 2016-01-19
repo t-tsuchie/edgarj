@@ -10,7 +10,20 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-# To use debugger
-# gem 'debugger'
-
 gem 'mysql2', '~> 0.3.20'
+gem 'config'
+
+group :development, :test do
+  gem 'byebug'
+end
+
+group :development do
+  gem 'thin'
+
+  # replacement of rdoc to generate document
+  gem 'yard'
+end
+
+group :test do
+  gem 'shoulda-context'
+end

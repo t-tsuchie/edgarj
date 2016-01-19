@@ -1,0 +1,15 @@
+<%#
+index.js.erb needs to draw whole popup elements(list, search, close-button)
+while search.js.erb does only:
+
+* draw search form
+* draw list if @search is valid
+%>
+<% if !@search.errors.any? %>
+  $('#edgarj_popup_list').replaceWith("<%= j(render 'list') %>");
+<% end %>
+$('#edgarj_popup_search').replaceWith("<%= j(render 'search') %>");
+$('#edgarj_form_popup').dialog('option', 'title',
+    '<%= t('edgarj.form.popup.title') % model.human_name %>');
+$('#edgarj_form_popup').dialog('open');
+

@@ -1,0 +1,55 @@
+<%#
+Form for search condition.
+
+= INPUTS
+
+@drawer::             Edgarj::Drawer::Normal object
+@search::             form value
+@notice::             notice message
+@error::              error message
+
+= SEE ALSO
+
+_form.html.erb::      record form
+%>
+
+<div id=edgarj_search_form>              <!-- edgarj/_search_form.html.erb -->
+  <% if @search.errors.any? %>
+    <div class="error_explanation">
+      <h2><%= t('error.search_form.title', count: @search.errors.count) %></h2>
+      <ul>
+      <% @search.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= draw_search_form_buttons %>
+  <%= @drawer.draw_search_form(@search) %>
+
+  <%= javascript_tag do %>
+    <% id = 'edgarj_search_operator_selection' %>
+    $('div.search_operator').contextMenu('<%= id -%>', {
+      bindings: {
+        '<%= id + '_eq' %>': function(target){
+          Edgarj.OperatorSelection.on_select(target, '=');
+        },
+        '<%= id + '_ne' %>': function(target){
+          Edgarj.OperatorSelection.on_select(target, '<>');
+        },
+        '<%= id + '_gt' %>': function(target){
+          Edgarj.OperatorSelection.on_select(target, '>');
+        },
+        '<%= id + '_ge' %>': function(target){
+          Edgarj.OperatorSelection.on_select(target, '>=');
+        },
+        '<%= id + '_lt' %>': function(target){
+          Edgarj.OperatorSelection.on_select(target, '<');
+        },
+        '<%= id + '_le' %>': function(target){
+          Edgarj.OperatorSelection.on_select(target, '<=');
+        },
+      }
+    });
+  <% end %>
+</div>

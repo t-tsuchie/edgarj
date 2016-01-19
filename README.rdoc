@@ -1,3 +1,33 @@
 = Edgarj
 
-This project rocks and uses MIT-LICENSE.
+Edgarj is an Ajax-based scaffold with:
+
+* QBE(Query By Example) search form.
+* column sort on record list.
+* popup view & controller for 'belongs_to' relation table to pick up a
+  parent record.
+* csv download.
+* user-role based access control.
+* Following levels of customization:
+  1. select columns and its order on view for list, form, and search-form
+  1. overwrite partial-template for each list, form, and search-form
+
+== Prerequisites
+
+* Rails 3.2 (because of our projects' rails version consistency).
+* external 'User' model.
+
+== KNOWN BUGS
+
+* "rake scaffold" (not "rake edgarj:scaffold") generates
+  WRONG functional test, which uses Edgarj's functional test template.
+
+== Building Package
+
+1. check if all tests are passed:
+    $ rake test
+1. Gem package is built under pkg/edgarj-N.NN.NN.gem by:
+    $ rake app:edgarj:build_gem
+1. commit Gemfile.lock (I don't know why Gemfile.lock is updated here).
+1. puch the package to rubygems site by:
+    $ gem push pkg/edgarj-N.NN.NN.gem

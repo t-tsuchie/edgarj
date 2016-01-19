@@ -1,0 +1,16 @@
+<!-- edgarj_popup/_index.html.erb -->
+<%#
+popup template.
+
+see EdgarjPopupController for more detail.
+%>
+<%= render 'search' %>
+<%= render 'list'   %>
+<hr>
+<center>
+  <%= button_tag t('close'),
+          type:     'button',
+          id:       'edgarj_popup_close',
+          onClick:  "$('#edgarj_form_popup').dialog('close');"
+  %>
+</center>

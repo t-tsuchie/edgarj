@@ -1,0 +1,42 @@
+<%#
+popup list.
+
+= INPUTS
+
+@list::                 popup model list
+params[:id_target]::    target DOM id for 'belongs_to' id (hidden)
+
+= OUTPUTS
+
+* paginate:
+  /edgarj_popup/index?update=...&template=
+* on click item, update id_target DOM by rec.id
+%>
+<% popup_field = Edgarj::PopupHelper::PopupField.new(params[:id_target]) %>
+<div id=edgarj_popup_list>           <!-- edgarj/popup/_list.html.erb -->
+  <table width="100%">
+    <tr>
+      <td><%= t('edgarj.default.total_records') % @count %></td>
+      <td><%= paginate @list,
+                  remote:         true,
+                  params:         {
+                    action:         'index',
+                   #model:          model.to_s,
+                    id_target:      popup_field.id_target}%></td>
+    </tr>
+  </table>
+  <%= popup_drawer.draw_list(@list) %>
+
+  <%= javascript_tag do %>
+  $(function(){
+    /* invoke select-callback on popup list */
+    $('.edgarj_popup_list_row').click(function(){
+      $('#<%= popup_field.id_target %>').val($(this).attr('data-id'));
+      $('#<%= popup_field.label_target %>').text($(this).attr('data-name'));
+      $('#<%= popup_field.label_hidden_field %>').val($(this).attr('data-name'));
+      $('#<%= popup_field.clear_link %>').show();
+      $('#edgarj_form_popup').dialog('close');
+    });
+  });
+  <% end %>
+</div>

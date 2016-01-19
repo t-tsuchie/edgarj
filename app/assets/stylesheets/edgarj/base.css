@@ -1,0 +1,308 @@
+h3 {
+  color:            #000;
+  padding-left:     5px;
+  border-left:      10px solid #248;
+  border-bottom:    1px  solid #248;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+}
+
+/* Edgarj list */
+div#edgarj_list table, div#edgarj_popup_list table {
+  border-collapse:  separate;
+  border-spacing:   0px;
+  empty-cells:      show;
+}
+
+div#edgarj_list       th, div#edgarj_list       td,
+div#edgarj_popup_list th, div#edgarj_popup_list td {
+  margin:           1px;
+  border:           0px;
+  padding:          1px 5px 1px 5px;
+  font-size:        80%;
+}
+
+div#edgarj_list th {
+  border-top:       1px solid #fca;
+  border-left:      1px solid #fca;
+  border-right:     1px solid #842;
+  border-bottom:    1px solid #842;
+  background-color: #c94;
+}
+
+div#edgarj_popup_list th {
+  border-top:       1px solid #abd;
+  border-left:      1px solid #abd;
+  border-right:     1px solid #347;
+  border-bottom:    1px solid #347;
+  background-color: #6ad;
+}
+
+div#edgarj_list table.list tr:hover, div#edgarj_popup_list table.list tr:hover {
+  background-color: #8fc;
+}
+
+/* form by <table> */
+form {
+  margin: 0em;
+}
+
+div#edgarj_form {
+  margin-top:       5px;
+  background-color: #f0e8b8;
+  padding:          5px;
+  border:           1px solid;
+  border-color:     #eef #668 #668 #eef;
+}
+
+div#edgarj_search_form {
+  margin-top:       5px;
+  background-color: #cfc;
+  padding:          5px;
+  border:           1px solid;
+  border-color:     #efe #686 #686 #efe;
+}
+
+/* hyper-link in Edgarj list, form, and search_form */
+div#edgarj_list a          { color: #000; }
+div#edgarj_list a:visited  { color: #000; }
+div#edgarj_list a:hover    { color: #eee; background-color:#08c; }
+div#edgarj_form a          { color: #000; }
+div#edgarj_form a:visited  { color: #000; }
+div#edgarj_form a:hover    { color: #eee; background-color:#08c; }
+div#edgarj_search_form a          { color: #000; }
+div#edgarj_search_form a:visited  { color: #000; }
+div#edgarj_search_form a:hover    { color: #eee; background-color:#08c; }
+
+span.edgarj_field_belongs_to_button {
+  font-size:    150%;
+  color:        #66a;
+}
+
+/* List's two-ton color */
+tr.list_line0 {
+   background-color: #ffffd0;
+}
+tr.list_line1 {
+   background-color: #f0f0f0;
+}
+
+/* login */
+/* List's two-ton color */
+.login tr th {
+  background-color: #fff;
+}
+
+/* error related */
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+td#login {
+  color: #333;
+}
+
+.edgarj_title {
+  text-decoration:  none;  
+}
+
+/*---------------------------------------------------------------
+ContextMenu
+---------------------------------------------------------------*/
+#control_edgarj_operator_select {
+  border:           1px solid #666;
+  background-color: #eee;
+/*
+  min-width:150px;
+*/
+}
+
+#control_edgarj_operator_select ul {
+  list-style:       none;
+  padding:          0;
+  margin:           0;
+  cursor:           pointer;
+}
+
+#control_edgarj_operator_select ul li {
+  text-align:       left;
+  padding:          3px 10px 3px 5px;
+  margin:           0;
+  cursor:           pointer;
+  text-decoration:  none;
+  color:            #333;
+  border-top:       1px solid #fff;
+  border-left:      1px solid #fff;
+  border-bottom:    1px solid #999;
+  border-right:     1px solid #999;
+/*
+  font-size:12px;
+  font-weight:bold;
+  font-family:"Lucida Grande",Verdana;
+*/
+}
+
+#control_edgarj_operator_select ul li.selected,
+#control_edgarj_operator_select ul li:hover {
+  color:            #fff;
+  background-color: #3875d7;
+  cursor:           pointer;
+}
+
+#control_edgarj_operator_select ul li.selected:hover {
+  color:            #333;
+  background-color: #eee;
+  cursor:           pointer;
+}
+
+#control_edgarj_operator_select ul li.disabled,
+#control_edgarj_operator_select ul li:hover.disabled {
+  background-color: #eee;
+  color:            #999;
+  cursor:           pointer;
+}
+
+div.search_operator {
+  padding:          3px;
+  margin:           3px;
+  border-top:       1px solid #cfc; /* background-color should be same as
+                                       div#edgarj_search_form's */
+  border-left:      1px solid #cfc;
+  border-right:     1px solid #cfc;
+  border-bottom:    1px solid #cfc;
+  cursor:           pointer;
+}
+div.search_operator:hover {
+  padding:          3px;
+  margin:           3px;
+  border-top:       1px solid #ddd;
+  border-left:      1px solid #ddd;
+  border-right:     1px solid #888;
+  border-bottom:    1px solid #888;
+  cursor:           pointer;
+}
+
+
+/*---------------------------------------------------------------
+For Top page
+---------------------------------------------------------------*/
+table.top_list {
+  border-collapse:  separate;
+  border-spacing:   0px;
+  empty-cells:      show;
+}
+
+table.top_list th, table.top_list td {
+  margin:           1px;
+  border:           0px;
+  padding:          1px 5px 1px 5px;
+}
+
+table.top_list th {
+  border-top:       1px solid #fca;
+  border-left:      1px solid #fca;
+  border-right:     1px solid #842;
+  border-bottom:    1px solid #842;
+  background-color: #c94;
+}
+
+
+/*---------------------------------------------------------------
+Topic path
+---------------------------------------------------------------*/
+#page_title {
+  width:          8em;
+}
+#topic_path {
+  padding-left:   30px;
+}
+
+/*---------------------------------------------------------------
+flash message
+---------------------------------------------------------------*/
+div#edgarj_message_error {
+  color:            #a00;
+}
+div#edgarj_message_notice {
+  color:            #0e0;
+}
+
+/*---------------------------------------------------------------
+error message
+---------------------------------------------------------------*/
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+div.error_explanation {
+  border:           2px solid red;
+  padding:          7px;
+  padding-bottom:   0;
+  background-color: #f0f0f0;}
+
+  div.error_explanation h2 {
+    text-align:       left;
+    font-weight:      bold;
+    padding:          5px 5px 5px 15px;
+    font-size:        12px;
+    margin:           -7px;
+    margin-bottom:    0px;
+    background-color: #c00;
+    color:            #fff;}
+
+  div.error_explanation ul {
+    padding-left:     10px;}
+
+    div.error_explanation ul li {
+      font-size:      12px;
+      list-style:     square;}
+
+
+/*---------------------------------------------------------------
+fix jquery issue
+
+http://forum.jquery.com/topic/jquery-ui-ui-resizable-handle-missing-for-dialog-widget
+---------------------------------------------------------------*/
+.ui-resizable-handle {
+  position:   absolute;
+  font-size:  0.1px;
+  z-index:    99999;
+  display:    block;
+}

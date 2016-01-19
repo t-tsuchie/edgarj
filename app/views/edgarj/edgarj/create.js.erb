@@ -1,0 +1,4 @@
+<% if !@record.errors.any? %>
+  $('#edgarj_list').replaceWith("<%= j(render 'list') %>");
+<% end %>
+$('#edgarj_form').replaceWith("<%= j(render 'form') %>");

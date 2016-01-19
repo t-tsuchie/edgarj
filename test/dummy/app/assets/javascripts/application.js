@@ -10,4 +10,12 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require jquery_ujs
+//= require jquery-ui
+//= require jquery-ui/datepicker-ja
+//= require jquery.remotipart
+//= require edgarj/base
+//= require edgarj/menu
+//= require edgarj/operator_selection
 //= require_tree .

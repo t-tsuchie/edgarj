@@ -1,4 +1,8 @@
 Dummy::Application.routes.draw do
+  edgarj_resources :authors
+  edgarj_resources :books
+  edgarj_popup_resources :authors_popup
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

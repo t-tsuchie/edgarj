@@ -1,0 +1,25 @@
+<%#
+Form for record detail
+
+= INPUTS
+
+@drawer::    drawer instance
+@record::       form value
+
+= SEE ALSO
+
+_search_form.htm.erb::  search form
+%>
+<div id=edgarj_form>
+  <% if @record.errors.any? %>
+    <div class="error_explanation">
+      <h2><%= t('error.form.title', count: @record.errors.count) %></h2>
+      <ul>
+      <% @record.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= @drawer.draw_form(@record) %>
+</div>

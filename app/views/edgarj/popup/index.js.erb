@@ -1,0 +1,5 @@
+$('#edgarj_form_popup').html("<%= j(render 'index') %>");
+$('#edgarj_form_popup').dialog('option', 'title',
+    '<%= t('edgarj.form.popup.title') % model_label %>');
+$('#edgarj_form_popup').dialog('open');
+

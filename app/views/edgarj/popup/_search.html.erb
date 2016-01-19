@@ -1,0 +1,42 @@
+<%#
+popup search form.
+
+= INPUTS
+
+@search::               search model
+params[:id_target]::    target DOM id for hidden 'belongs_to' id
+
+%>
+<div id=edgarj_popup_search>           <!-- edgarj/popup/_search.html.erb -->
+  <% pf = Edgarj::PopupHelper::PopupField.new(params[:id_target]) %>
+  <%= form_for(@search,
+          as:     'search_form',
+          remote: true,
+          method: :get,
+          url:    {action: 'search'}) do |f| %>
+    <table>
+    <tr>
+      <td><%= v('search') %></td>
+      <td>
+        <%= f.select("col",
+                popup_drawer.columns_for(popup_drawer.list_columns).map{|col|
+                    [model.human_attribute_name(col.name), col.name]}) %>
+      </td>
+      <td><%= f.text_field("val") %></td>
+      <td>
+        <% if @search.errors.any? %>
+          <div class="error_explanation">
+            <ul>
+              <% @search.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    </table>
+    <%= hidden_field_tag :model,      model.to_s %>
+    <%= hidden_field_tag :id_target,  pf.id_target %>
+  <% end %>
+</div>
