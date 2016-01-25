@@ -32,7 +32,7 @@ Edgarj 0.* for Rails 3.2
 1. check if all tests are passed:
     $ rake test
 1. Gem package is built under pkg/edgarj-N.NN.NN.gem by:
-    $ rake app:edgarj:build_gem
-1. commit Gemfile.lock (I don't know why Gemfile.lock is updated here).
+    $ rake build
+1. commit Gemfile.lock since it is updated.
 1. puch the package to rubygems site by:
     $ gem push pkg/edgarj-N.NN.NN.gem
