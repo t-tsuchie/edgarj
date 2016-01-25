@@ -1,0 +1,7 @@
+== 4.00.01
+
+* delete garbage in gem package
+
+== 4.00.00
+
+* 1st release for rails4
