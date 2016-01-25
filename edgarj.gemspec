@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.version     = Edgarj::VERSION
   s.licenses    = ['MIT']
   s.authors     = ["Fuminori Ido"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
+  s.email       = ["fuminori_ido@yahoo.co.jp"]
+  s.homepage    = "https://sourceforge.net/projects/jjedgar/"
   s.summary     = "Scaffold with Ajax, search, sort, 'belongs_to' popup, and more."
   s.description = <<EOM
 Edgarj is an Ajax-based scaffold with QBE(Query By Example) search form,
