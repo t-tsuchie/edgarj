@@ -1,1 +1,15 @@
-../edgarj/_message_popup.html.erb
+<!-- edgarj/_message_popup.html.erb -->
+<%#
+message popup template.
+%>
+
+<center>
+  <div id=edgarj_message_error ><%= flash[:error]  || '' %></div>
+  <div id=edgarj_message_notice><%= flash[:notice] || '' %></div>
+  <hr>
+  <%= button_tag t('close'),
+          type:     'button',
+          id:       'edgarj_message_popup_close',
+          onClick:  "$('#edgarj_message_popup').dialog('close');"
+  %>
+</center>

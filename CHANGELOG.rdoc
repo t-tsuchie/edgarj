@@ -1,3 +1,7 @@
+== 4.00.03
+
+* workaround gem 2.5.* issue
+
 == 4.00.01
 
 * delete garbage in gem package
