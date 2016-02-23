@@ -139,6 +139,7 @@ module Edgarj
         # NOTE2: valid? after create() calls validate_on_update.  This is not
         # an expected behavior.  So, new, valid?, then save.
         @record = model.new(permitted_params(:create))
+        @record_saved = @record     # copy for possible later use
         on_upsert
        #upsert_files
         raise ActiveRecord::RecordNotSaved if !@record.valid?
@@ -191,6 +192,7 @@ module Edgarj
     # ModelPermission::DELETE on this controller is required.
     def destroy
       m = model.find(user_scoped.find(params[:id]).id)
+      @record_saved = m     # copy for possible later use
       m.destroy
 
       prepare_list
