@@ -118,8 +118,20 @@ module Edgarj
         Edgarj::ListDrawer::Normal
       end
 
+      def url_for_show(record)
+        @vc.url_for(action: 'show', id: record.id, format: :js)
+      end
+
+      def draw_row(record, &block)
+        @vc.content_tag(:tr,
+            class:  "list_line#{@line_color} edgarj_row",
+            data:   {url: url_for_show(record)}) do
+          yield
+        end
+      end
+
       def draw_list(list)
-        line_color  = 1
+        @line_color = 1
         d           = list_drawer_class.new(
             self,
             @options[:list_drawer_options] || {})
@@ -134,9 +146,8 @@ module Edgarj
           end +
           ''.html_safe.tap do |trs|
             for rec in list do
-              line_color = 1 - line_color
-              d.set_path(rec)
-              trs << @vc.content_tag(:tr, class: "list_line#{line_color}") do
+              @line_color = 1 - @line_color
+              trs << draw_row(rec) do
                 ''.html_safe.tap do |cols|
                   for col in columns_for(list_columns) do
                     cols << d.draw_column(rec, col)

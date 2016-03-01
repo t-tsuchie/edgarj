@@ -15,7 +15,6 @@ module Edgarj
     # :save::         html options for 'save' button.
     # :search_form::  html options for 'search_form' button.
     # :delete::       html options for 'delete' button.
-    # :namespace::    delete url namespace
     def draw_form_buttons(options = {})
       content_tag(:table) do
         content_tag(:tr) do

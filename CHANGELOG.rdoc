@@ -1,3 +1,15 @@
+== 4.01.00
+
+* Edgarj::Drawer::Popup no longer require URL-route to show an record.
+* move 'data-url' HTML attribute from column to row
+
+=== Impact
+
+* Any class which overwrites Edgarj::ListDrawer::Normal#set_path method
+  should be rewritten.
+* Any view, helper, and js which overwrites 'data-url' HTML attribute
+  should be rewritten to move to row.
+
 == 4.00.04
 
 * add @record_saved for possible later use

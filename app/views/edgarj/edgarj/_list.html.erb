@@ -45,7 +45,7 @@
   
     /* show detail on clicking a list row */
     $('._edgarj_list_column').click(function(){
-      $.ajax($(this).attr('data-url'));
+      $.ajax($(this).closest('.edgarj_row').attr('data-url'));
     });
   });
   <% end %>

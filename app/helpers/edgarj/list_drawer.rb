@@ -10,7 +10,6 @@ module Edgarj
 
       # * drawer        - Edgarj::Drawer::Base object
       # * options
-      #   * namespace   - namespace for path (ex: :admin)
       #
       # TODO: enum_cache は止め、グローバルに１つのキャッシュを作る。
       def initialize(drawer, options = {})
@@ -191,23 +190,14 @@ module Edgarj
        #@belongs_to_link  = true    # make link on belongs_to
       end
 
-      # prepare path for the rec, which will be drawn later.
-      def set_path(rec)
-        @path = @vc.polymorphic_path([@options[:namespace], rec], format: :js)
-      end
-
       # <td> options
       #
       # add Edgarj.click_listCB() with base result.
       # When the column is parent, do nothing.
       def td_options(rec, col)
-        result = super.merge(
+        super.merge(
             style:  'cursor:pointer;',
             class:  '_edgarj_list_column')
-       #if !@parent_rec
-          result[:'data-url'] = @path
-       #end
-        result
       end
     end
   end
