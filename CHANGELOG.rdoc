@@ -1,3 +1,7 @@
+== 4.01.01
+
+* fix commit-loss
+
 == 4.01.00
 
 * Edgarj::Drawer::Popup no longer require URL-route to show an record.
