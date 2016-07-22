@@ -119,15 +119,15 @@ module Edgarj
     end
 =end
 
-    # 1. t('view.CONTROLLER.label.MODEL.COLUMN') if exists.
-    # 1. column I18n is used if exists.
+    # 1. t('view.CONTROLLER.MODEL.COL_NAME')
+    # 1. MODEL.human_attribute_name(COL_NAME)
     # 1. else, parent.human_name is used.
     def draw_belongs_to_label_sub(model, col_name, parent_model)
       @controller_model ||= controller.send(:model)
+
       I18n.t(col_name,
           scope:    "view.#{controller_path}.#{@controller_model.name.underscore}",
-          default:  I18n.t(col_name,
-              scope:    "activerecord.attributes.#{model.to_s.underscore}",
+          default:  model.human_attribute_name(col_name,
               default:  parent_model.human_name))
     end
 

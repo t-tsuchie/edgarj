@@ -8,7 +8,7 @@ module Edgarj
     include ControllerMixinCommon
     include Edgarj::PermissionMixin
 
-    helper_method :model, :popup_drawer
+    helper_method :title, :model, :popup_drawer
     before_filter :require_read_permission
 
     # draw popup windows
@@ -16,6 +16,8 @@ module Edgarj
     # === INPUTS
     # params[:id_target]::          id target DOM on click entry of popup
     # params[:page]::               on paginate
+    # params[:title]::              (optional) popup title
+    #                               default: t('edgarj.form.popup.title') % model_label
     #
     # === Paginate logic
     # - params[:page] exists        -> save it to @page_info and use it
@@ -110,6 +112,15 @@ module Edgarj
 
     def popup_drawer
       @popup_drawer
+    end
+
+    # popup window title is used in the following priority:
+    #
+    # 1. params[:title]
+    # 1. this method
+    # 1. t('edgarj.form.popup.title') % model_label
+    def title
+      ''
     end
 
     # This works as:

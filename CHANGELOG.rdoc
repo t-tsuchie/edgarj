@@ -1,3 +1,8 @@
+== 4.02.00
+
+* popup window title selection logic is changed
+* 'belongs_to' column label selection logic is changed
+
 == 4.01.01
 
 * fix commit-loss
