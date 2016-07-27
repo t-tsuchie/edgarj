@@ -22,6 +22,17 @@ Edgarj 0.* for Rails 3.2
 * Rails
 * external 'User' model.
 
+== Dummy App
+
+* How to run
+    $ cd test/dummy
+    $ rake db:drop && rake db:create && rake db:migrate
+    $ FIXTURES_PATH=../../test/fixtures rake db:fixtures:load
+    $ rails server
+* How to test
+    $ cd [RAILS_ROOT]
+    $ rake test
+
 == KNOWN BUGS
 
 * "rake scaffold" (not "rake edgarj:scaffold") generates

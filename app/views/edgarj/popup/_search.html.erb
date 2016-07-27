@@ -19,7 +19,7 @@ params[:id_target]::    target DOM id for hidden 'belongs_to' id
       <td><%= v('search') %></td>
       <td>
         <%= f.select("col",
-                popup_drawer.columns_for(popup_drawer.list_columns).map{|col|
+                popup_drawer.columns_for(popup_drawer.list_columns, :list).map{|col|
                     [model.human_attribute_name(col.name), col.name]}) %>
       </td>
       <td><%= f.text_field("val") %></td>

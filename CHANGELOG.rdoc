@@ -1,3 +1,8 @@
+== 4.03.00
+
+* In Edgarj::Drawer::Base, *columns method can have ColumnInfo instance
+  as an element, which draws specific label, sort-action, and value.
+
 == 4.02.00
 
 * popup window title selection logic is changed
