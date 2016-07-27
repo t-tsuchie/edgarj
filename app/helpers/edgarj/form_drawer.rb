@@ -81,7 +81,7 @@ module Edgarj
 
       def columns
         drawer = @vc.drawer
-        drawer.columns_for(drawer.form_columns)
+        drawer.columns_for(drawer.form_columns, :form)
       end
 
       # base method for derived class
@@ -215,7 +215,7 @@ module Edgarj
       # overwrite
       def columns
         drawer = @vc.drawer
-        drawer.columns_for(drawer.search_form_columns)
+        drawer.columns_for(drawer.search_form_columns, :search_form)
       end
 
       # overwrite

@@ -25,22 +25,18 @@ module Edgarj
 
         @vc.content_tag(:table, width: '100%', class: 'list') do
           @vc.content_tag(:tr) do
-            ''.html_safe.tap do |result|
-              for col in columns_for(list_columns) do
-                result << d.draw_column_header(col, id_target: @params[:id_target])
-              end
+            for col in columns_for(list_columns, :list) do
+              @vc.concat d.draw_column_header(col, id_target: @params[:id_target])
             end
           end +
-          ''.html_safe.tap do |trs|
+          @vc.capture do
             for rec in list do
               @line_color = 1 - @line_color
-              trs << draw_row(rec) do
-                ''.html_safe.tap do |cols|
-                  for col in columns_for(list_columns) do
-                    cols << d.draw_column(rec, col)
-                  end
+              @vc.concat(draw_row(rec) do
+                for col in columns_for(list_columns, :list) do
+                  @vc.concat d.draw_column(rec, col)
                 end
-              end
+              end)
             end
           end
         end

@@ -1,8 +1,159 @@
+require 'singleton'
+
 module Edgarj
   module Drawer
+    # Column-info classes to provide the following common methods:
+    #
+    # * name
+    # * css_style
+    # * fullname
+    # * column_header_label
+    # * column_value
+    #
+    # As wells as the following for backward compatibility:
+    # * type
+    module ColumnInfo
+      # ActiveRecord::ConnectionAdapters::[DRIVER]::Column wrapper
+      #
+      # NOTE: ColumnInfo::* classes instances are cached during server process
+      # lifetime so that dynamic object (like drawer) cannot be stored.
+      class Normal
+        # @param vc     [ViewContext]
+        # @param model  [AR]
+        # @param name   [String]
+        def initialize(vc, model, name)
+          @vc             = vc
+          @model          = model
+          @name           = name
+          @ar_column_info = model.columns_hash[name]
+        end
+
+        def name
+          @name
+        end
+
+        def css_style
+          case @ar_column_info.type
+          when :integer
+            {align: 'right'}
+          when :boolean
+            {align: 'center'}
+          else
+            {}
+          end
+        end
+
+        # return table_name + col.name
+        def fullname
+          @model.table_name + '.' + @name
+        end
+
+        # draw column header (with sort link)
+        #
+        # === INPUTS
+        # options::     options to url_for
+        def column_header_label(page_info, options)
+          label = @vc.column_label(@name)
+          dir   = 'asc'
+
+          if page_info.order_by == fullname
+            # toggle direction
+            if page_info.dir == 'asc' || page_info.dir.blank?
+              label += '▲'
+              dir    = 'desc'
+            else
+              label += '▼'
+            end
+          end
+          @vc.link_to(label,
+            {
+              :action                       => 'page_info_save',
+              :id                           => page_info.id,
+              'edgarj_page_info[order_by]'  => fullname,
+              'edgarj_page_info[dir]'       => dir
+            }.merge(options),
+            :remote => true,
+            :method => :put)
+        end
+
+        # draw rec.col other than 'belongs_to'
+        #
+        # === INPUTS
+        # rec::   AR instance
+        def column_value(rec, drawer)
+          if (enum = @vc.get_enum(rec.class, @ar_column_info))
+            @enum_cache[name] = enum
+            @vc.draw_column_enum(rec, @ar_column_info, enum)
+          else
+            case @ar_column_info.type
+            when :datetime
+              @vc.datetime_fmt(rec.send(name))
+            when :date
+              @vc.date_fmt(rec.send(name))
+            when :integer
+              rec.send(name).to_s
+            when :boolean
+              rec.send(name) ? '√' : ''
+            else
+              # NOTE: rec.send(col.name) is not used since sssn.send(:data)
+              # becomes hash rather than actual string-data so that following
+              # split() fails for Hash.
+              if str = rec.attributes[name]
+                draw_trimmed_str(str)
+              else
+                ''
+              end
+            end
+          end
+        end
+
+        # just for backward compatibility
+        def type
+          @ar_column_info.type
+        end
+
+        private
+
+        # trim string when too long
+        def draw_trimmed_str(str)
+          s = str.split(//)
+          if s.size > Edgarj::LIST_TEXT_MAX_LEN
+            s = s[0..Edgarj::LIST_TEXT_MAX_LEN] << '...'
+          end
+          s.join('')
+        end
+      end
+
+      # auto-generated column-info for 'belongs_to' column
+      #
+      # parent model is assumed to have 'name' method
+      class BelongsTo < Normal
+        def initialize(vc, model, name, parent_model, belongs_to_link)
+          super(vc, model, name)
+          @parent_model     = parent_model
+          @belongs_to_link  = belongs_to_link
+        end
+
+        # column header for 'belongs_to' column prints label without
+        # any sort action unlike Normal-class behavior.
+        def column_header_label(page_info, options)
+          @vc.draw_belongs_to_label_sub(@model, name, @parent_model)
+        end
+
+        def column_value(rec, drawer)
+          @parent_rec = rec.belongs_to_AR(@ar_column_info)
+          if @belongs_to_link
+            @vc.link_to(@parent_rec.name, drawer.popup_path(self), remote: true)
+          else
+            @parent_rec ? @parent_rec.name : ''
+          end
+        end
+      end
+    end
+
     # 'Mediator' to draw list and form of the model on the view.
     #
-    # This collaborate with the following sub classes:
+    # This collaborates with the following sub classes:
     # Edgarj::ListDrawer::Normal::    for list
     # Edgarj::FormDrawer::Base::      for data entry form
     # Edgarj::FormDrawer::Search::    for search form
@@ -138,30 +289,23 @@ module Edgarj
 
         @vc.content_tag(:table, width: '100%', class: 'list') do
           @vc.content_tag(:tr) do
-            ''.html_safe.tap do |result|
-              for col in columns_for(list_columns) do
-                result << d.draw_column_header(col)
-              end
+            for col in columns_for(list_columns, :list) do
+              @vc.concat d.draw_column_header(col)
             end
           end +
-          ''.html_safe.tap do |trs|
+          @vc.capture do
             for rec in list do
               @line_color = 1 - @line_color
-              trs << draw_row(rec) do
-                ''.html_safe.tap do |cols|
-                  for col in columns_for(list_columns) do
-                    cols << d.draw_column(rec, col)
+              @vc.concat(draw_row(rec) do
+                @vc.capture do
+                  for col in columns_for(list_columns, :list) do
+                    @vc.concat d.draw_column(rec, col)
                   end
                 end
-              end
+              end)
             end
           end
         end
-      end
-
-      # return table_name + col.name
-      def fullname(col)
-        @model.table_name + '.' + col.name
       end
 
       # overwrite to replace form drawer for the model
@@ -192,17 +336,57 @@ module Edgarj
         end
       end
 
+      # cache ColumnInfo array per 'controller x kind'
+      class ColumnInfoCache
+        include Singleton
+
+        def initialize
+          #Rails.logger.debug('ColumnInfoCache initialized')
+          @cache = {}
+        end
+
+        # return if @cache[controller][kind] exists
+        def presence(controller, kind)
+          if @cache[controller].nil?
+            @cache[controller] = {}
+          end
+          @cache[controller][kind]
+        end
+
+        def set(controller, kind, val)
+          if @cache[controller].nil?
+            @cache[controller] = {}
+          end
+          @cache[controller][kind] = val
+        end
+
+        def cache
+          @cache
+        end
+      end
+
       # return array of model columns (ActiveRecord::ConnectionAdapters::X_Column type).
       #
       # === INPUTS
       # column_name_list::  column name list
-      def columns_for(column_name_list)
-        [].tap do |result|
-          for col_name in column_name_list do
-            if (col = @model.columns_hash[col_name])
-              result << col
-            end
-          end
+      # kind::              :list, :form, or :search_form
+      def columns_for(column_name_list, kind = :default)
+        if (val = ColumnInfoCache.instance.presence(@vc.controller.class, kind))
+          val
+        else
+          #Rails.logger.debug("ColumnInfoCache non-cached access for (#{@vc.controller.class.name} x #{kind})")
+          ColumnInfoCache.instance.set(@vc.controller.class, kind,
+              [].tap do |result|
+                for col_name in column_name_list do
+                  if (col = @model.columns_hash[col_name])
+                    if (parent = @model.belongs_to_AR(col))
+                      result << ColumnInfo::BelongsTo.new(@vc, @model, col_name, parent, false)
+                    else
+                      result << ColumnInfo::Normal.new(@vc, @model, col_name)
+                    end
+                  end
+                end
+              end)
         end
       end
 

@@ -1,3 +1,10 @@
+== 4.03.00
+
+* In Edgarj::Drawer::Base, build ColumnInfo internal structure from columns
+  information to support following 'belongs_to' column actions:
+  * sort by 'belongs_to' column
+  * draw other than 'parent.name' on 'belongs_to' column
+
 == 4.02.00
 
 * popup window title selection logic is changed
