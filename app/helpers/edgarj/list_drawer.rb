@@ -12,13 +12,10 @@ module Edgarj
 
       # * drawer        - Edgarj::Drawer::Base object
       # * options
-      #
-      # TODO: use global cache rather than @enum_cache.
       def initialize(drawer, options = {})
         @drawer           = drawer
         @options          = options.dup
         @vc               = drawer.vc
-        @enum_cache       = {}
         @bitset_cache     = {}
         @parent_rec       = nil
         @belongs_to_link  = false   # doesn't make link on belongs_to

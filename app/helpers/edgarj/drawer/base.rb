@@ -82,7 +82,6 @@ module Edgarj
         # rec::   AR instance
         def column_value(rec, drawer)
           if (enum = @vc.get_enum(rec.class, @ar_column_info))
-            @enum_cache[name] = enum
             @vc.draw_column_enum(rec, @ar_column_info, enum)
           else
             case @ar_column_info.type
