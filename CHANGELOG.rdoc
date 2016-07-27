@@ -1,9 +1,7 @@
 == 4.03.00
 
-* In Edgarj::Drawer::Base, build ColumnInfo internal structure from columns
-  information to support following 'belongs_to' column actions:
-  * sort by 'belongs_to' column
-  * draw other than 'parent.name' on 'belongs_to' column
+* In Edgarj::Drawer::Base, *columns method can have ColumnInfo instance
+  as an element, which draws specific label, sort-action, and value.
 
 == 4.02.00
 

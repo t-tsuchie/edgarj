@@ -6,7 +6,7 @@ module Edgarj
     #
     # * name
     # * css_style
-    # * fullname
+    # * sort_key
     # * column_header_label
     # * column_value
     #
@@ -43,8 +43,8 @@ module Edgarj
           end
         end
 
-        # return table_name + col.name
-        def fullname
+        # return table_name + col.name for sort
+        def sort_key
           @model.table_name + '.' + @name
         end
 
@@ -56,7 +56,7 @@ module Edgarj
           label = @vc.column_label(@name)
           dir   = 'asc'
 
-          if page_info.order_by == fullname
+          if page_info.order_by == sort_key
             # toggle direction
             if page_info.dir == 'asc' || page_info.dir.blank?
               label += '▲'
@@ -69,7 +69,7 @@ module Edgarj
             {
               :action                       => 'page_info_save',
               :id                           => page_info.id,
-              'edgarj_page_info[order_by]'  => fullname,
+              'edgarj_page_info[order_by]'  => sort_key,
               'edgarj_page_info[dir]'       => dir
             }.merge(options),
             :remote => true,
@@ -377,13 +377,16 @@ module Edgarj
           ColumnInfoCache.instance.set(@vc.controller.class, kind,
               [].tap do |result|
                 for col_name in column_name_list do
-                  if (col = @model.columns_hash[col_name])
-                    if (parent = @model.belongs_to_AR(col))
-                      result << ColumnInfo::BelongsTo.new(@vc, @model, col_name, parent, false)
-                    else
-                      result << ColumnInfo::Normal.new(@vc, @model, col_name)
-                    end
-                  end
+                  result <<
+                      if col_name.is_a?(ColumnInfo::Normal)
+                        col_name
+                      elsif (col = @model.columns_hash[col_name])
+                        if (parent = @model.belongs_to_AR(col))
+                          ColumnInfo::BelongsTo.new(@vc, @model, col_name, parent, false)
+                        else
+                          ColumnInfo::Normal.new(@vc, @model, col_name)
+                        end
+                      end
                 end
               end)
         end
