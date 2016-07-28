@@ -4,68 +4,60 @@ module Edgarj
   module Drawer
     # Column-info classes to provide the following common methods:
     #
-    # * name
-    # * css_style
+    # * label
     # * sort_key
-    # * column_header_label
     # * column_value
     #
-    # As wells as the following for backward compatibility:
+    # and the following optional methods:
+    # * css_style
+    # * column_header_label
+    #
+    # as wells as the following for backward compatibility:
+    # * name
     # * type
+    #
+    # NOTE: ColumnInfo::* classes instances are cached during server process
+    # lifetime so that dynamic object (like drawer) cannot be stored.
     module ColumnInfo
-      # ActiveRecord::ConnectionAdapters::[DRIVER]::Column wrapper
-      #
-      # NOTE: ColumnInfo::* classes instances are cached during server process
-      # lifetime so that dynamic object (like drawer) cannot be stored.
-      class Normal
-        # @param vc     [ViewContext]
-        # @param model  [AR]
-        # @param name   [String]
-        def initialize(vc, model, name)
-          @vc             = vc
-          @model          = model
-          @name           = name
-          @ar_column_info = model.columns_hash[name]
+      # Abstract class for all of ColumnInfo
+      class Base
+        def label(vc)
+          raise 'derived should implement'
         end
 
-        def name
-          @name
+        def sort_key
+          raise 'derived should implement'
+        end
+
+        # @param rec      [AR]
+        # @param drawer   [Edgarj::Drawer::Base]
+        def column_value(rec, drawer)
+          rec.inspect
         end
 
         def css_style
-          case @ar_column_info.type
-          when :integer
-            {align: 'right'}
-          when :boolean
-            {align: 'center'}
-          else
-            {}
-          end
-        end
-
-        # return table_name + col.name for sort
-        def sort_key
-          @model.table_name + '.' + @name
+          {}
         end
 
         # draw column header (with sort link)
         #
-        # === INPUTS
-        # options::     options to url_for
-        def column_header_label(page_info, options)
-          label = @vc.column_label(@name)
-          dir   = 'asc'
+        # @param vc         [ViewContext]       Rails view_context
+        # @param path_info  [Edgarj::PageInfo]
+        # @param options    [Hash]              options to url_for
+        def column_header_label(vc, page_info, options)
+          _label  = label(vc)
+          dir     = 'asc'
 
           if page_info.order_by == sort_key
             # toggle direction
             if page_info.dir == 'asc' || page_info.dir.blank?
-              label += '▲'
+              _label += '▲'
               dir    = 'desc'
             else
-              label += '▼'
+              _label += '▼'
             end
           end
-          @vc.link_to(label,
+          vc.link_to(_label,
             {
               :action                       => 'page_info_save',
               :id                           => page_info.id,
@@ -76,19 +68,49 @@ module Edgarj
             :method => :put)
         end
 
+        def name
+          raise 'derived should implement'
+        end
+
+        # just for backward compatibility
+        def type
+          raise 'derived should implement'
+        end
+      end
+
+      # ActiveRecord::ConnectionAdapters::[DRIVER]::Column wrapper
+      class Normal < Base
+        # @param vc     [ViewContext]
+        # @param model  [AR]
+        # @param name   [String]
+        def initialize(model, name)
+          @model          = model
+          @name           = name
+          @ar_column_info = model.columns_hash[name]
+        end
+
+        def label(vc)
+          vc.column_label(@name)
+        end
+
+        # return table_name + col.name for sort
+        def sort_key
+          @model.table_name + '.' + @name
+        end
+
         # draw rec.col other than 'belongs_to'
         #
         # === INPUTS
         # rec::   AR instance
         def column_value(rec, drawer)
-          if (enum = @vc.get_enum(rec.class, @ar_column_info))
-            @vc.draw_column_enum(rec, @ar_column_info, enum)
+          if (enum = drawer.vc.get_enum(rec.class, @ar_column_info))
+            drawer.vc.draw_column_enum(rec, @ar_column_info, enum)
           else
             case @ar_column_info.type
             when :datetime
-              @vc.datetime_fmt(rec.send(name))
+              drawer.vc.datetime_fmt(rec.send(name))
             when :date
-              @vc.date_fmt(rec.send(name))
+              drawer.vc.date_fmt(rec.send(name))
             when :integer
               rec.send(name).to_s
             when :boolean
@@ -104,6 +126,22 @@ module Edgarj
               end
             end
           end
+        end
+
+        def css_style
+          case @ar_column_info.type
+          when :integer
+            {align: 'right'}
+          when :boolean
+            {align: 'center'}
+          else
+            {}
+          end
+        end
+
+        # just for backward compatibility
+        def name
+          @name
         end
 
         # just for backward compatibility
@@ -127,22 +165,22 @@ module Edgarj
       #
       # parent model is assumed to have 'name' method
       class BelongsTo < Normal
-        def initialize(vc, model, name, parent_model, belongs_to_link)
-          super(vc, model, name)
+        def initialize(model, name, parent_model, belongs_to_link)
+          super(model, name)
           @parent_model     = parent_model
           @belongs_to_link  = belongs_to_link
         end
 
         # column header for 'belongs_to' column prints label without
         # any sort action unlike Normal-class behavior.
-        def column_header_label(page_info, options)
-          @vc.draw_belongs_to_label_sub(@model, name, @parent_model)
+        def column_header_label(vc, page_info, options)
+          vc.draw_belongs_to_label_sub(@model, name, @parent_model)
         end
 
         def column_value(rec, drawer)
           @parent_rec = rec.belongs_to_AR(@ar_column_info)
           if @belongs_to_link
-            @vc.link_to(@parent_rec.name, drawer.popup_path(self), remote: true)
+            drawer.vc.link_to(@parent_rec.name, drawer.popup_path(self), remote: true)
           else
             @parent_rec ? @parent_rec.name : ''
           end
@@ -378,13 +416,13 @@ module Edgarj
               [].tap do |result|
                 for col_name in column_name_list do
                   result <<
-                      if col_name.is_a?(ColumnInfo::Normal)
+                      if col_name.is_a?(ColumnInfo::Base)
                         col_name
                       elsif (col = @model.columns_hash[col_name])
                         if (parent = @model.belongs_to_AR(col))
-                          ColumnInfo::BelongsTo.new(@vc, @model, col_name, parent, false)
+                          ColumnInfo::BelongsTo.new(@model, col_name, parent, false)
                         else
-                          ColumnInfo::Normal.new(@vc, @model, col_name)
+                          ColumnInfo::Normal.new(@model, col_name)
                         end
                       end
                 end

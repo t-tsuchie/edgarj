@@ -13,22 +13,17 @@ module Edgarj
       # * drawer        - Edgarj::Drawer::Base object
       # * options
       def initialize(drawer, options = {})
-        @drawer           = drawer
-        @options          = options.dup
-        @vc               = drawer.vc
-        @bitset_cache     = {}
-        @parent_rec       = nil
-        @belongs_to_link  = false   # doesn't make link on belongs_to
+        @drawer = drawer
       end
 
       def draw_column_header(col, options={})
-        @vc.content_tag(:th) do
-          col.column_header_label(@drawer.page_info, options)
+        @drawer.vc.content_tag(:th) do
+          col.column_header_label(@drawer.vc, @drawer.page_info, options)
         end
       end
 
       def draw_column(rec, col)
-        @vc.content_tag(:td, td_options(rec, col)) do
+        @drawer.vc.content_tag(:td, td_options(rec, col)) do
           col.column_value(rec, @drawer)
         end
       end
@@ -46,7 +41,6 @@ module Edgarj
     class Normal < Base
       def initialize(edgarj_drawer, options = {})
         super(edgarj_drawer, options)
-       #@belongs_to_link  = true    # make link on belongs_to
       end
 
       # <td> options

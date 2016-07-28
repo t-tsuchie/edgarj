@@ -1,3 +1,7 @@
+== 4.04.00
+
+* redesign Edgarj::Drawer::ColumnInfo
+
 == 4.03.00
 
 * In Edgarj::Drawer::Base, *columns method can have ColumnInfo instance
