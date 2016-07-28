@@ -1,3 +1,7 @@
+== 4.04.01
+
+* fix: popup list <td> 'align'-attr doesn't work
+
 == 4.04.00
 
 * redesign Edgarj::Drawer::ColumnInfo
