@@ -9,7 +9,7 @@ module Edgarj
     # * column_value
     #
     # and the following optional methods:
-    # * css_style
+    # * tag_options
     # * column_header_label
     #
     # as wells as the following for backward compatibility:
@@ -35,7 +35,8 @@ module Edgarj
           rec.inspect
         end
 
-        def css_style
+        # HTML tag options (e.g. css-class) in Hash
+        def tag_options
           {}
         end
 
@@ -80,7 +81,6 @@ module Edgarj
 
       # ActiveRecord::ConnectionAdapters::[DRIVER]::Column wrapper
       class Normal < Base
-        # @param vc     [ViewContext]
         # @param model  [AR]
         # @param name   [String]
         def initialize(model, name)
@@ -128,12 +128,12 @@ module Edgarj
           end
         end
 
-        def css_style
+        def tag_options
           case @ar_column_info.type
           when :integer
-            {align: 'right'}
+            {class: 'align_right'}
           when :boolean
-            {align: 'center'}
+            {class: 'align_center'}
           else
             {}
           end

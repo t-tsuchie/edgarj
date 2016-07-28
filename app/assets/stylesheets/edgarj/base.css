@@ -45,6 +45,13 @@ div#edgarj_list table.list tr:hover, div#edgarj_popup_list table.list tr:hover {
   background-color: #8fc;
 }
 
+div#edgarj_popup_list td.align_right {
+  text-align:       right;
+}
+div#edgarj_popup_list td.align_center {
+  text-align:       center;
+}
+
 /* form by <table> */
 form {
   margin: 0em;

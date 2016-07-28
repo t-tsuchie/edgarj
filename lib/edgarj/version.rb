@@ -1,3 +1,3 @@
 module Edgarj
-  VERSION = '4.04.00'
+  VERSION = '4.04.01'
 end

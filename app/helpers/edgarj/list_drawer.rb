@@ -32,7 +32,7 @@ module Edgarj
 
       # <td> options
       def td_options(rec, col)
-        col.css_style
+        col.tag_options
       end
     end
 
@@ -45,12 +45,10 @@ module Edgarj
 
       # <td> options
       #
-      # add Edgarj.click_listCB() with base result.
+      # merge css to let Edgarj.click_listCB() work with base result.
       # When the column is parent, do nothing.
       def td_options(rec, col)
-        super.merge(
-            style:  'cursor:pointer;',
-            class:  '_edgarj_list_column')
+        super.merge(class: '_edgarj_list_column'){|key, _old, _new| [_old, _new].flatten}
       end
     end
   end
