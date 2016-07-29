@@ -1,6 +1,6 @@
 $('#edgarj_form_popup').html("<%= j(render 'index') %>");
-$('#edgarj_form_popup').dialog('option', 'title',
-    '<%= params[:title] || title || t('edgarj.form.popup.title') % model_label %>');
 $('#edgarj_form_popup').
+    dialog('option', 'title', '<%= params[:title] || title.presence || t('edgarj.form.popup.title') % model_label %>').
     dialog('open').
-    dialog('option', 'width',   'auto');
+    dialog('option', 'minWidth',  400).
+    dialog('option', 'width',     'auto');
