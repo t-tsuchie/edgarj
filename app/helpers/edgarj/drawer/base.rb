@@ -4,9 +4,10 @@ module Edgarj
   module Drawer
     # Column-info classes to provide the following common methods:
     #
-    # * label
-    # * sort_key
-    # * column_value
+    # * label           - for column header label in the list
+    # * sort_key        - to sort list
+    # * column_value    - cell text for the column in the list
+    # * field           - for the form
     #
     # and the following optional methods:
     # * tag_options
@@ -21,6 +22,7 @@ module Edgarj
     module ColumnInfo
       # Abstract class for all of ColumnInfo
       class Base
+        # for column header label in the list
         def label(vc)
           raise 'derived should implement'
         end
@@ -29,10 +31,20 @@ module Edgarj
           raise 'derived should implement'
         end
 
+        # cell text for the column in the list
+        #
         # @param rec      [AR]
         # @param drawer   [Edgarj::Drawer::Base]
         def column_value(rec, drawer)
           rec.inspect
+        end
+
+        # input field for form
+        #
+        # @param rec          [AR]
+        # @param form_drawer  [Edgarj::FormDrawer::Base]
+        def field(rec, form_drawer)
+          form_drawer.draw_field(rec, self)
         end
 
         # HTML tag options (e.g. css-class) in Hash

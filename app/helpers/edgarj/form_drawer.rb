@@ -11,6 +11,7 @@ module Edgarj
     # 1. Next, when draw_ATTR() is defined, it is called.  See ModelPermissionControllerHelper for example.
     # 1. Then, consider to overwrite draw_ATTR() method.
     class Base
+      attr_accessor :vc, :f
 
       # === INPUTS
       # drawer::  Edgarj::Drawer instance
@@ -44,38 +45,33 @@ module Edgarj
       # 1. 'belongs_to' column uses:
       # ** I18n.t('activerecord.attributes.MODEL.EXT_ID')
       # ** parent.human_name
-
-# TODO: draw_field() 層があってもよい
-# form.draw() と form._draw_field(), form._draw_belongs_to_field ... は
-# あるけど、抽象化層の form.draw_field がない
       def draw()
-        adrs_field  = {}
         @vc.content_tag(:table) do
           @left       = true
-          html        = ''
-          for col in columns do
-            draw_method = "draw_#{col.name}"
-            html << if self.class.method_defined?(draw_method) then
-              send(draw_method, col)
-           #elsif edgarj_address?(col)
-           #   draw_address(col)
-           #elsif edgarj_file?(col)
-           #  draw_file(col)
-            elsif (enum = get_enum(col))
-               draw_enum(col, enum)
-            elsif (bitset = get_bitset(col))
-              draw_bitset(col, bitset)
-            else
-              parent_model = @vc.model.belongs_to_AR(col)
-              if parent_model
-                _draw_belongs_to_field(parent_model, col)
-              else
-                _draw_field(col)
-              end
+          @vc.capture do
+            for col in columns do
+              @vc.concat col.field(@record, self)
             end
+            @vc.concat('<td colspan=3></td>'.html_safe) if !@left
           end
-          html << '<td colspan=3></td>'.html_safe if !@left
-          html.html_safe
+        end
+      end
+
+      def draw_field(rec, col)
+        draw_method = "draw_#{col.name}"
+        if self.class.method_defined?(draw_method) then
+          send(draw_method, col)
+        elsif (enum = get_enum(col))
+          draw_enum(col, enum)
+        elsif (bitset = get_bitset(col))
+          draw_bitset(col, bitset)
+        else
+          parent_model = @vc.model.belongs_to_AR(col)
+          if parent_model
+            _draw_belongs_to_field(parent_model, col)
+          else
+            _draw_field(col)
+          end
         end
       end
 
@@ -110,9 +106,9 @@ module Edgarj
 
       # flip field to left-lane or right-lane
       def _draw_2_lane(&block)
-        result = @left ? '<tr>' : ''
+        result = @left ? @vc.tag(:tr, nil, true) : ''.html_safe
         result += yield
-        result += '</tr>' if !@left
+        result += '</tr>'.html_safe if !@left
         @left = !@left              # flip it
         result
       end
@@ -232,7 +228,7 @@ module Edgarj
       #
       def _draw_head(col, label=nil, &block)
         _draw_2_lane{
-          sprintf("<th>%s</th><td>", label || @vc.column_label(col)) +
+          sprintf("<th>%s</th><td>", label || @vc.column_label(col)).html_safe +
 
           # add operator for appropreate data type.
           if col.name == 'id'
@@ -244,7 +240,7 @@ module Edgarj
             else
               ''
             end
-          end + '</td><td>' + yield + '</td>'
+          end + '</td><td>'.html_safe + yield + '</td>'.html_safe
         }
       end
 
