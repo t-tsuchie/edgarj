@@ -14,7 +14,7 @@ Edgarj is an Ajax-based scaffold with:
 
 == Version
 
-Edgarj 4.* for Rails 4
+Edgarj 4.* for Rails 4.*
 Edgarj 0.* for Rails 3.2
 
 == Prerequisites
@@ -42,10 +42,10 @@ Edgarj 0.* for Rails 3.2
 
 1. make sure to increment lib/edgarj/version.rb
 1. check if all tests are passed:
-    $ rake test
+    $ bundle exec rake test
 1. commit any updated files.
 1. Gem package is built under pkg/edgarj-N.NN.NN.gem by:
-    $ rake app:edgarj:build_gem
+    $ bundle exec rake app:edgarj:build_gem
 1. commit Gemfile.lock when it is updated.
 1. puch the package to rubygems site by:
     $ gem push pkg/edgarj-N.NN.NN.gem

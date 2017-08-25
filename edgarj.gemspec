@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.licenses    = ['MIT']
   s.authors     = ["Fuminori Ido"]
   s.email       = ["fuminori_ido@yahoo.co.jp"]
-  s.homepage    = "https://sourceforge.net/projects/jjedgar/"
+  s.homepage    = "https://github.com/fuminori-ido/edgarj"
   s.summary     = "Scaffold with Ajax, search, sort, 'belongs_to' popup, and more."
   s.description = <<EOM
 Edgarj is an Ajax-based scaffold with QBE(Query By Example) search form,
@@ -22,7 +22,7 @@ EOM
   s.files = Dir["{app,config,db,lib,locale}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails",               "~> 4.0.13"
+  s.add_dependency "rails",               '~> 4.0'
   s.add_dependency 'jquery-rails',        '~> 3.1', '>= 3.1.0'
   s.add_dependency 'jquery-ui-rails',     '~> 5.0', '>= 5.0.0'
   s.add_dependency 'config',              '~> 1.0.0'
