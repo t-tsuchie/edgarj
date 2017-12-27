@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    edgarj (4.05.03)
+    edgarj (4.05.04)
       activerecord-session_store (~> 0.1)
       awesome_nested_set (~> 3)
       config (~> 1.0.0)
@@ -134,7 +134,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    yard (0.8.7.6)
+    yard (0.9.12)
 
 PLATFORMS
   ruby
