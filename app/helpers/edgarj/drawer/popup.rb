@@ -17,9 +17,13 @@ module Edgarj
         end
       end
 
+      def list_drawer_class
+        Edgarj::ListDrawer::Normal
+      end
+
       def draw_list(list)
         @line_color = 1
-        d           = Edgarj::ListDrawer::Normal.new(
+        d           = list_drawer_class.new(
             self,
             @options[:list_drawer_options] || {})
 

@@ -1,3 +1,8 @@
+== 4.06.00
+
+* Edgarj::Drawer::Popup#list_drawer_class is added to allow derived class
+  to overwrite.
+
 == 4.05.02
 
 * allow rails 4.*
