@@ -95,7 +95,7 @@ module Edgarj
             session_id = s.session_id
             s.destroy
             logger.info("deleting session(#{session_id})")
-          rescue ActiveRecord::RecordNotFound => ex
+          rescue ActiveRecord::RecordNotFound
             logger.warn("session not found(#{session_id})")
           end
         end

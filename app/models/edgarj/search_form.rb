@@ -243,7 +243,6 @@ module Edgarj
 
     def validate_data_type
       for col in klass.columns do
-        col_str     = col_name(col)
         encoded_col = encode_name(col)
         val     = @attrs[encoded_col]
         case col.type

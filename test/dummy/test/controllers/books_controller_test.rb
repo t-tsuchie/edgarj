@@ -107,8 +107,8 @@ class BooksControllerTest < ActionController::TestCase
       end
 
       should 'search with operator' do
-        xhr :get, :search, edgarj_search_form: {_id: @book.id},
-            edgarj_search_form: {
+        xhr :get, :search, edgarj_search_form: {
+              _id: @book.id,
               edgarj_search_form_operator: {
                 _id: '<>'
               }

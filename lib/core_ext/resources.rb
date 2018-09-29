@@ -20,7 +20,7 @@ module ActionDispatch::Routing::Mapper::Resources
   # Where, :id is internally used for session so that client application
   # doesn't have to take care it.
   def edgarj_resources(*symbols, &block)
-    resources *symbols do
+    resources(*symbols) do
       yield if block_given?
 
       collection do
@@ -59,7 +59,7 @@ module ActionDispatch::Routing::Mapper::Resources
   # Where, :id is internally used for session so that client application
   # doesn't have to take care it.
   def edgarj_popup_resources(*symbols, &block)
-    resources *symbols, only: [:index] do
+    resources(*symbols, only: [:index]) do
       yield if block_given?
 
       collection do

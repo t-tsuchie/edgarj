@@ -9,6 +9,6 @@ module Edgarj
       render '/edgarj/edgarj/search_operator',
           o:        o,
           method:   method
-      end
+    end
   end
 end

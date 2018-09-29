@@ -258,15 +258,15 @@ module Edgarj
     # ModelPermission::READ on this controller is required.
     #
     def search_save
-      svc = SavedVcontext.save(current_user, nil,
-                               params[:saved_page_info_name], page_info)
+      SavedVcontext.save(current_user, nil,
+                         params[:saved_page_info_name], page_info)
 
       render :update do |page|
         page << "Edgarj.SearchSavePopup.close();"
         page.replace 'edgarj_load_condition_menu',
            :partial=>'edgarj/load_condition_menu'
       end
-    rescue ActiveRecord::ActiveRecordError => ex
+    rescue ActiveRecord::ActiveRecordError
       app_rescue
       render :update do |page|
         page.replace_html 'search_save_popup_flash_error', :text=>t('save_fail')
@@ -332,7 +332,6 @@ module Edgarj
                         Time.now.strftime("%Y%m%d-%H%M%S"))
       file        = Tempfile.new(filename, Settings.edgarj.csv_dir)
       csv_visitor = EdgarjHelper::CsvVisitor.new(view_context)
-      cond        = {:conditions=>page_info.record.conditions}
       file.write CSV.generate_line(model.columns.map{|c| c.name})
       for rec in user_scoped.where(page_info.record.conditions).
           order(
