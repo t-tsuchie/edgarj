@@ -26,7 +26,7 @@ EOM
   s.add_dependency 'jquery-rails',        '~> 3.1', '>= 3.1.0'
   s.add_dependency 'jquery-ui-rails',     '~> 5.0', '>= 5.0.0'
   s.add_dependency 'config',              '~> 1.0.0'
-  s.add_dependency "kaminari",            '~> 0.15'
+  s.add_dependency "kaminari",            '>= 0.15', '< 2.0'
   s.add_dependency "remotipart",          '~> 1.2'
   s.add_dependency 'awesome_nested_set',  '~> 3'
   s.add_dependency 'activerecord-session_store',  '~> 0.1'
